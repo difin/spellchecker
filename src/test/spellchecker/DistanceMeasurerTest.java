@@ -96,4 +96,15 @@ public class DistanceMeasurerTest {
 
         assertEquals(9, result);
     }
+
+    @Test
+    public void whenAdditionsAndSubstitutionsAreNeddedThenResultIsCorrect(){
+
+        String word1 = "GAMBOL";
+        String word2 = "GUMBO";
+
+        int result = DistanceMeasurer.distance(word1, word2);
+
+        assertEquals(2, result);
+    }
 }
