@@ -12,10 +12,11 @@ import java.util.Map;
  */
 public class SpellChecker {
 
-    private String vocabFile = "vocab.txt";
-    private String sentenceFile = "sentence.txt";
-    private String maxDistanceFile = "MaxDistance.txt";
-    private String outputFile = "MisspelledWords.txt";
+    private String vocabFile;
+    private String sentenceFile;
+    private String maxDistanceFile;
+    private String outputFile;
+    private String referenceOutputFile;
 
     private Map<String, List<String>> linearSearchOutput;
     private Map<String, List<String>> bktreeSearchOutput;
@@ -24,14 +25,21 @@ public class SpellChecker {
     private List<String> sentenceList;
     private int maxDistance;
 
-    public SpellChecker(String vocabFile, String sentenceFile, String maxDistanceFile, String outputFile){
-        this.vocabFile = vocabFile;
-        this.sentenceFile = sentenceFile;
-        this.maxDistance = maxDistance;
-        this.outputFile = outputFile;
+    public SpellChecker(){
+        vocabFile = "vocab.txt";
+        sentenceFile = "sentence.txt";
+        maxDistanceFile = "MaxDistance.txt";
+        outputFile = "MisspelledWords.txt";
+        referenceOutputFile = null;
     }
 
-    public SpellChecker(){}
+    public SpellChecker(String directory, String outputFile, String referenceOutputFile){
+        this.vocabFile = directory + "/" + "vocab.txt";
+        this.sentenceFile = directory + "/" + "sentence.txt";
+        this.maxDistanceFile = directory + "/" + "MaxDistance.txt";
+        this.outputFile = directory + "/" + outputFile;
+        this.referenceOutputFile = directory + "/" + referenceOutputFile;
+    }
 
     public static void main(String[] args) throws IOException {
 
@@ -43,7 +51,7 @@ public class SpellChecker {
         readFilesIntoMemory();
         runLinearSearch();
         runBKTreeSearch();
-        verifyOutputEquality();
+        verifyOutputEquality(linearSearchOutput, bktreeSearchOutput);
         createOutputFile(linearSearchOutput);
     }
 
@@ -79,24 +87,24 @@ public class SpellChecker {
         bktreeSearchOutput = BKTreeSearch.search(vocabList, sentenceList, maxDistance);
     }
 
-    private void verifyOutputEquality(){
+    public static void verifyOutputEquality(Map<String, List<String>> output1, Map<String, List<String>> output2){
 
         StopWatch timer = new StopWatch();
         timer.start();
 
-        assert linearSearchOutput.size() == bktreeSearchOutput.size();
+        assert output1.size() == output2.size();
 
-        for (Map.Entry<String, List<String>> linearSearchEntry : linearSearchOutput.entrySet()){
+        for (Map.Entry<String, List<String>> output1Entry : output1.entrySet()){
 
-            String mispelledWord = linearSearchEntry.getKey();
-            List<String> correctionsLinearSearch = linearSearchEntry.getValue();
+            String mispelledWord = output1Entry.getKey();
+            List<String> correctionsOutput1 = output1Entry.getValue();
 
-            assert bktreeSearchOutput.containsKey(mispelledWord);
+            assert output2.containsKey(mispelledWord);
 
-            List<String> correctionsBKTree = bktreeSearchOutput.get(linearSearchEntry.getKey());
+            List<String> correctionsOutput2 = output2.get(mispelledWord);
 
-            assert correctionsBKTree.size() == correctionsLinearSearch.size();
-            assert correctionsBKTree.containsAll(correctionsLinearSearch);
+            assert correctionsOutput2.size() == correctionsOutput1.size();
+            assert correctionsOutput2.containsAll(correctionsOutput1);
         }
 
         timer.stop();

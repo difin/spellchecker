@@ -1,5 +1,4 @@
 .idea/
 *.iml
-*.txt
 target/
 *.class
