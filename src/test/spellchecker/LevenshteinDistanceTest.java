@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Created by vagrant on 9/23/17.
+ * Created by dfingerman on 9/23/17.
  */
 public class LevenshteinDistanceTest {
 

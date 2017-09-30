@@ -4,7 +4,7 @@ import static java.lang.Integer.max;
 import static java.lang.Math.min;
 
 /**
- * Created by vagrant on 9/23/17.
+ * Created by dfingerman on 9/23/17.
  */
 public class LevenshteinDistance {
 

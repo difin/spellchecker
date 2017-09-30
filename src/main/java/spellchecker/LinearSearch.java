@@ -1,12 +1,14 @@
 package spellchecker;
 
+import org.apache.commons.lang3.time.StopWatch;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Created by vagrant on 9/24/17.
+ * Created by dfingerman on 9/24/17.
  */
 public class LinearSearch {
 

@@ -1,12 +1,9 @@
 package spellchecker;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
- * Created by vagrant on 9/29/17.
+ * Created by dfingerman on 9/29/17.
  */
 public class BKTree
 {
@@ -36,9 +33,9 @@ public class BKTree
         return children.get(distance);
     }
 
-    public Set<String> query(String wordInQuery, int tolerance){
+    public List<String> query(String wordInQuery, int tolerance){
 
-        Set<String> matches = new HashSet<>();
+        List<String> matches = new ArrayList<>();
         int distance = LevenshteinDistance.distance(word, wordInQuery);
 
         if (distance <= tolerance){

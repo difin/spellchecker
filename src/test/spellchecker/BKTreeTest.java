@@ -4,12 +4,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Set;
-
-import static org.junit.Assert.*;
+import java.util.List;
 
 /**
- * Created by vagrant on 9/29/17.
+ * Created by dfingerman on 9/29/17.
  */
 public class BKTreeTest {
 
@@ -29,7 +27,7 @@ public class BKTreeTest {
     @Test
     public void queryWithToleranceOneAndExpectOneMatch(){
 
-        Set<String> matches = tree.query("bike", 1);
+        List<String> matches = tree.query("bike", 1);
 
         Assert.assertTrue(matches.size() == 1);
         Assert.assertTrue(matches.iterator().next().equals("biker"));
@@ -38,7 +36,7 @@ public class BKTreeTest {
     @Test
     public void queryWithToleranceTwoAndExpectOneMatch(){
 
-        Set<String> matches = tree.query("bright", 2);
+        List<String> matches = tree.query("bright", 2);
 
         Assert.assertTrue(matches.size() == 1);
         Assert.assertTrue(matches.iterator().next().equals("night"));
@@ -47,7 +45,7 @@ public class BKTreeTest {
     @Test
     public void queryWithToleranceTwoAndExpectThreeMatch(){
 
-        Set<String> matches = tree.query("rice", 2);
+        List<String> matches = tree.query("rice", 2);
 
         Assert.assertTrue(matches.size() == 4);
         Assert.assertTrue(matches.contains("nice"));
