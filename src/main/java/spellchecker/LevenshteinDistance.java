@@ -6,7 +6,7 @@ import static java.lang.Math.min;
 /**
  * Created by vagrant on 9/23/17.
  */
-public class DistanceMeasurer {
+public class LevenshteinDistance {
 
     public static int distance(String word1, String word2){
         return levenshteinDistance(word1, word2);

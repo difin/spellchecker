@@ -21,7 +21,7 @@ public class LinearSearch {
                 List<String> wordCorrections = new ArrayList<>();
 
                 for (String wordFromVocab : vocabList){
-                    if (DistanceMeasurer.distance(wordToCheck, wordFromVocab) <= maxDistance){
+                    if (LevenshteinDistance.distance(wordToCheck, wordFromVocab) <= maxDistance){
                         wordCorrections.add(wordFromVocab);
                     }
                 }
