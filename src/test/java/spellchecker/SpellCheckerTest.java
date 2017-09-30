@@ -42,21 +42,40 @@ public class SpellCheckerTest {
         return output;
     }
 
-    @Test
-    public void testCase1(){
+    public void runSpellCheckingOnGivenTestCase(String testCaseFolder){
 
-        String testCaseFolder = resourcesDirectoryPath + "/" + "testcase1";
+        String testCaseFolderFullPath = resourcesDirectoryPath + "/" + testCaseFolder;
         String outputFile = "myMisspelledWords.txt";
         String referenceOutputFile = "MisspelledWords.txt";
 
-        SpellChecker spellChecker = new SpellChecker(testCaseFolder, outputFile, referenceOutputFile);
+        SpellChecker spellChecker = new SpellChecker(testCaseFolderFullPath, outputFile, referenceOutputFile);
         spellChecker.runSpellCheck();
 
         SpellChecker.verifyOutputEquality(
-                readOutputFromFile(testCaseFolder, outputFile),
-                readOutputFromFile(testCaseFolder, referenceOutputFile)
+                readOutputFromFile(testCaseFolderFullPath, outputFile),
+                readOutputFromFile(testCaseFolderFullPath, referenceOutputFile)
         );
 
-        new File(testCaseFolder + "/" + outputFile).delete();
+        new File(testCaseFolderFullPath + "/" + outputFile).delete();
+    }
+
+    @Test
+    public void testCase1(){
+        runSpellCheckingOnGivenTestCase("testcase1");
+    }
+
+    @Test
+    public void testCase2(){
+        runSpellCheckingOnGivenTestCase("testcase2");
+    }
+
+    @Test
+    public void testCase3(){
+        runSpellCheckingOnGivenTestCase("testcase3");
+    }
+
+    @Test
+    public void testCase4(){
+        runSpellCheckingOnGivenTestCase("testcase4");
     }
 }
