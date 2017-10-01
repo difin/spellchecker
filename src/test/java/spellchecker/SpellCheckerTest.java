@@ -48,7 +48,7 @@ public class SpellCheckerTest {
         String outputFile = "myMisspelledWords.txt";
         String referenceOutputFile = "MisspelledWords.txt";
 
-        SpellChecker spellChecker = new SpellChecker(testCaseFolderFullPath, outputFile, referenceOutputFile);
+        SpellChecker spellChecker = new SpellChecker(testCaseFolderFullPath, outputFile);
         spellChecker.runSpellCheck();
 
         SpellChecker.verifyOutputEquality(

@@ -16,7 +16,6 @@ public class SpellChecker {
     private String sentenceFile;
     private String maxDistanceFile;
     private String outputFile;
-    private String referenceOutputFile;
 
     private Map<String, List<String>> linearSearchOutput;
     private Map<String, List<String>> bktreeSearchOutput;
@@ -30,15 +29,13 @@ public class SpellChecker {
         sentenceFile = "sentence.txt";
         maxDistanceFile = "MaxDistance.txt";
         outputFile = "MisspelledWords.txt";
-        referenceOutputFile = null;
     }
 
-    public SpellChecker(String directory, String outputFile, String referenceOutputFile){
+    public SpellChecker(String directory, String outputFile){
         this.vocabFile = directory + "/" + "vocab.txt";
         this.sentenceFile = directory + "/" + "sentence.txt";
         this.maxDistanceFile = directory + "/" + "MaxDistance.txt";
         this.outputFile = directory + "/" + outputFile;
-        this.referenceOutputFile = directory + "/" + referenceOutputFile;
     }
 
     public static void main(String[] args) throws IOException {
