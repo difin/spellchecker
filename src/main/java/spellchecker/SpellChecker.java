@@ -23,12 +23,14 @@ public class SpellChecker {
     private List<String> vocabList;
     private List<String> sentenceList;
     private int maxDistance;
+    private int overridenMaxDistance;
 
     public SpellChecker(){
         vocabFile = "vocab.txt";
         sentenceFile = "sentence.txt";
         maxDistanceFile = "MaxDistance.txt";
         outputFile = "MisspelledWords.txt";
+        overridenMaxDistance = -1;
     }
 
     public SpellChecker(String directory, String outputFile){
@@ -36,6 +38,7 @@ public class SpellChecker {
         this.sentenceFile = directory + "/" + "sentence.txt";
         this.maxDistanceFile = directory + "/" + "MaxDistance.txt";
         this.outputFile = directory + "/" + outputFile;
+        overridenMaxDistance = -1;
     }
 
     public static void main(String[] args) throws IOException {
@@ -60,6 +63,14 @@ public class SpellChecker {
         vocabList = FileUtils.fileToList(vocabFile);
         sentenceList = Arrays.asList(FileUtils.fileToList(sentenceFile).get(0).split(" "));
         maxDistance = Integer.valueOf(FileUtils.fileToList(maxDistanceFile).get(0));
+
+        if (maxDistance < 0 || maxDistance > 5){
+            throw new RuntimeException("Max distance is not in range [0,5]");
+        }
+
+        if (overridenMaxDistance != -1){
+            maxDistance = overridenMaxDistance;
+        }
 
         timer.stop();
         System.out.println("Files reading time: " + timer.toString());
@@ -114,5 +125,9 @@ public class SpellChecker {
 
         timer.stop();
         System.out.println("Output file writing time: " + timer.toString());
+    }
+
+    public void overrideMaxDistance(int maxDistance){
+        overridenMaxDistance = maxDistance;
     }
 }
