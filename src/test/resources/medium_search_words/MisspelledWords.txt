@@ -1,0 +1,5 @@
+levenshtein:
+wgfords:affords, fords, oxfords, words
+algorijm:algorism, algorisms, algorist, algorithm
+searcnjg:searing
+compaison:companion, comparison, comparisons, compassion

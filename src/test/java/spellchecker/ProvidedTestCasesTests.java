@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * Created by dfingerman on 9/30/17.
  */
-public class SpellCheckerTest {
+public class ProvidedTestCasesTests {
 
     private String resourcesDirectoryPath = new File("src/test/resources").getAbsolutePath();
 
@@ -46,11 +46,14 @@ public class SpellCheckerTest {
         return output;
     }
 
-    public void runSpellCheckingOnGivenTestCase(String testCaseFolder){
+    public void runTest(String testCaseFolder){
 
         String testCaseFolderFullPath = resourcesDirectoryPath + "/" + testCaseFolder;
         String outputFile = "myMisspelledWords.txt";
         String referenceOutputFile = "MisspelledWords.txt";
+
+        File outpuFileOnDisk = new File(testCaseFolderFullPath + "/" + outputFile);
+        outpuFileOnDisk.delete();
 
         SpellChecker spellChecker = new SpellChecker(testCaseFolderFullPath, outputFile);
         spellChecker.runSpellCheck();
@@ -60,33 +63,35 @@ public class SpellCheckerTest {
                 readOutputFromFile(testCaseFolderFullPath, referenceOutputFile)
         );
 
-        new File(testCaseFolderFullPath + "/" + outputFile).delete();
+        outpuFileOnDisk.delete();
     }
 
     @Rule
     public TestRule watcher = new TestWatcher() {
         protected void starting(Description description) {
-            System.out.println("\nStarting test: " + description.getMethodName());
+            System.out.println("-------------------------------------------------------");
+            System.out.println("\tStarting test: " + description.getMethodName());
+            System.out.println("-------------------------------------------------------");
         }
     };
 
     @Test
     public void testCase1(){
-        runSpellCheckingOnGivenTestCase("testcase1");
+        runTest("testcase1");
     }
 
     @Test
     public void testCase2(){
-        runSpellCheckingOnGivenTestCase("testcase2");
+        runTest("testcase2");
     }
 
     @Test
     public void testCase3(){
-        runSpellCheckingOnGivenTestCase("testcase3");
+        runTest("testcase3");
     }
 
     @Test
     public void testCase4(){
-        runSpellCheckingOnGivenTestCase("testcase4");
+        runTest("testcase4");
     }
 }
