@@ -66,9 +66,6 @@ public class SpellChecker {
 
         timer.stop();
         System.out.println("Files reading time: " + timer.toString());
-
-        timer.reset();
-        timer.start();
     }
 
     private void runLinearSearch(){
