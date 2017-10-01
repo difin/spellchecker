@@ -1,8 +1,6 @@
 package spellchecker;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -18,9 +16,8 @@ public class FileUtils {
 
     public static List<String> fileToList(String fileName){
 
-        try {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))){
 
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
             String line;
 
             List<String> lines = new ArrayList<String>();
@@ -59,10 +56,18 @@ public class FileUtils {
             outputList.add("0");
         }
 
-        try {
-            Files.write(Paths.get(fileName), outputList, Charset.forName("UTF-8"), StandardOpenOption.CREATE);
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName));){
+
+            for (int i=0; i<outputList.size(); i++){
+                String line = outputList.get(i);
+                bufferedWriter.write(line);
+
+                if (i<outputList.size()-1){
+                    bufferedWriter.newLine();
+                }
+            }
         } catch (IOException e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
     }
 }
