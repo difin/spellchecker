@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Math.min;
+
 /**
  * Created by dfingerman on 9/23/17.
  */
@@ -23,7 +25,10 @@ public class SpellChecker {
     private List<String> vocabList;
     private List<String> sentenceList;
     private int maxDistance;
+
+    // These variables are used for tests
     private int overridenMaxDistance;
+    private int maxDictionaryLines;
 
     public SpellChecker(){
         vocabFile = "vocab.txt";
@@ -31,6 +36,7 @@ public class SpellChecker {
         maxDistanceFile = "MaxDistance.txt";
         outputFile = "MisspelledWords.txt";
         overridenMaxDistance = -1;
+        maxDictionaryLines = -1;
     }
 
     public SpellChecker(String directory, String outputFile){
@@ -39,6 +45,8 @@ public class SpellChecker {
         this.maxDistanceFile = directory + "/" + "MaxDistance.txt";
         this.outputFile = directory + "/" + outputFile;
         overridenMaxDistance = -1;
+        maxDictionaryLines = -1;
+
     }
 
     public static void main(String[] args) throws IOException {
@@ -68,12 +76,16 @@ public class SpellChecker {
             throw new RuntimeException("Max distance is not in range [0,5]");
         }
 
+        timer.stop();
+        System.out.println("Files reading time: " + timer.toString());
+
         if (overridenMaxDistance != -1){
             maxDistance = overridenMaxDistance;
         }
 
-        timer.stop();
-        System.out.println("Files reading time: " + timer.toString());
+        if (maxDictionaryLines != -1){
+            vocabList = vocabList.subList(0, min(maxDictionaryLines, vocabList.size()));
+        }
     }
 
     private void runLinearSearch(){
@@ -129,5 +141,9 @@ public class SpellChecker {
 
     public void overrideMaxDistance(int maxDistance){
         overridenMaxDistance = maxDistance;
+    }
+
+    public void setMaxDictionaryLines(int maxLines){
+        maxDictionaryLines = maxLines;
     }
 }
