@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * Created by dfingerman on 9/30/17.
  */
-public class ProvidedTestCasesTests {
+public class ProvidedTestCasesTest {
 
     private String resourcesDirectoryPath = new File("src/test/resources").getAbsolutePath();
 

@@ -55,9 +55,9 @@ public class BKTreeTest {
         }
 
         Assert.assertTrue(matches.size() == 4);
-        Assert.assertTrue(matches.contains("nice"));
-        Assert.assertTrue(matches.contains("vise"));
-        Assert.assertTrue(matches.contains("mise"));
-        Assert.assertTrue(matches.contains("ice"));
+        Assert.assertTrue(wordCorrectionsList.contains("nice"));
+        Assert.assertTrue(wordCorrectionsList.contains("vise"));
+        Assert.assertTrue(wordCorrectionsList.contains("mise"));
+        Assert.assertTrue(wordCorrectionsList.contains("ice"));
     }
 }

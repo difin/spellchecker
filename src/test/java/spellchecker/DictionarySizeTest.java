@@ -11,7 +11,7 @@ import java.io.File;
 /**
  * Created by dfingerman on 9/30/17.
  */
-public class DictionarySizeTests {
+public class DictionarySizeTest {
 
     private String resourcesDirectoryPath = new File("src/test/resources").getAbsolutePath();
 

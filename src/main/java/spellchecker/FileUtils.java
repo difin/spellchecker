@@ -33,7 +33,7 @@ public class FileUtils {
         }
     }
 
-    public static void createOutputFile(String fileName, Map<String, List<String>> outputMap){
+    public static void createSpellCheckingOutputFile(String fileName, Map<String, List<String>> outputMap){
 
         List<String> outputList = new ArrayList<>();
 
@@ -55,6 +55,11 @@ public class FileUtils {
         if (outputList.size() == 0){
             outputList.add("0");
         }
+
+        writeListToFile(fileName, outputList);
+    }
+
+    public static void writeListToFile(String fileName, List<String> outputList){
 
         try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName));){
 

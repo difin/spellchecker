@@ -133,7 +133,7 @@ public class SpellChecker {
         StopWatch timer = new StopWatch();
         timer.start();
 
-        FileUtils.createOutputFile(outputFile, outputMap);
+        FileUtils.createSpellCheckingOutputFile(outputFile, outputMap);
 
         timer.stop();
         System.out.println("Output file writing time: " + timer.toString());

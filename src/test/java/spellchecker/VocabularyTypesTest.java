@@ -7,15 +7,11 @@ import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by dfingerman on 9/30/17.
  */
-public class SearchWordsLengthTests {
+public class VocabularyTypesTest {
 
     private String resourcesDirectoryPath = new File("src/test/resources").getAbsolutePath();
 
@@ -28,6 +24,7 @@ public class SearchWordsLengthTests {
         outpuFileOnDisk.delete();
 
         SpellChecker spellChecker = new SpellChecker(testCaseFolderFullPath, outputFile);
+        spellChecker.setMaxDictionaryLines(200000);
         spellChecker.runSpellCheck();
     }
 
@@ -41,17 +38,11 @@ public class SearchWordsLengthTests {
     };
 
     @Test
-    public void shortSearchWords(){
-        runTest("short_search_words");
-    }
+    public void binaryVocabulary(){ runTest("binary_vocabulary"); }
 
     @Test
-    public void mediumSearchWords(){
-        runTest("medium_search_words");
-    }
+    public void englishVocabulary(){ runTest("medium_search_words"); }
 
     @Test
-    public void longSearchWords(){
-        runTest("long_search_words");
-    }
+    public void bigAlphabetVocabulary(){ runTest("big_alphabet_vocabulary"); }
 }
