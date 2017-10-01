@@ -1,6 +1,5 @@
 package spellchecker;
 
-import static java.lang.Integer.max;
 import static java.lang.Math.min;
 
 /**
@@ -9,26 +8,30 @@ import static java.lang.Math.min;
 public class LevenshteinDistance {
 
     public static int distance(String word1, String word2){
-        return levenshteinDistance(word1, word2);
-    }
 
-    private static int levenshteinDistance(String word1, String word2){
+        int[][] matrix = new int[word1.length()+2][word2.length()+2];
 
-        int[][] matrix = new int[word1.length()+1][word2.length()+1];
-
-        for (int i=0; i<matrix.length; i++){
-            matrix[i][0] = i;
+        for (int i=2; i<matrix.length; i++){
+            matrix[i][0] = Character.getNumericValue(word1.charAt(i-2));
         }
 
-        for (int i=0; i<matrix[1].length; i++){
-            matrix[0][i] = i;
+        for (int i=2; i<matrix[0].length; i++){
+            matrix[0][i] = Character.getNumericValue(word2.charAt(i-2));
         }
 
         for (int i=1; i<matrix.length; i++){
-            for (int j=1; j<matrix[0].length; j++){
+            matrix[i][1] = i-1;
+        }
+
+        for (int i=1; i<matrix[1].length; i++){
+            matrix[1][i] = i-1;
+        }
+
+        for (int i=2; i<matrix.length; i++){
+            for (int j=2; j<matrix[0].length; j++){
 
                 int cost = 1;
-                if (word1.charAt(i-1) == word2.charAt(j-1)){
+                if (matrix[i][0] == matrix[0][j]){
                     cost = 0;
                 }
 
