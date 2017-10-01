@@ -1,6 +1,10 @@
 package spellchecker;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestRule;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -58,6 +62,13 @@ public class SpellCheckerTest {
 
         new File(testCaseFolderFullPath + "/" + outputFile).delete();
     }
+
+    @Rule
+    public TestRule watcher = new TestWatcher() {
+        protected void starting(Description description) {
+            System.out.println("\nStarting test: " + description.getMethodName());
+        }
+    };
 
     @Test
     public void testCase1(){
