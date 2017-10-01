@@ -1,5 +1,7 @@
 package spellchecker;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -17,7 +19,17 @@ public class FileUtils {
     public static List<String> fileToList(String fileName){
 
         try {
-            return Files.readAllLines(Paths.get(fileName));
+
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            String line;
+
+            List<String> lines = new ArrayList<String>();
+            while((line = bufferedReader.readLine()) != null){
+                lines.add(line.toLowerCase());
+            }
+
+            return lines;
+
         } catch (IOException e) {
             System.out.println(e);
             return null;
@@ -41,6 +53,10 @@ public class FileUtils {
             }
 
             outputList.add(outputLine);
+        }
+
+        if (outputList.size() == 0){
+            outputList.add("0");
         }
 
         try {

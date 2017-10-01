@@ -18,16 +18,22 @@ public class LinearSearch {
 
         for (String wordToCheck : sentenceList){
 
-            if (!vocabList.contains(wordToCheck)){
+            List<String> wordCorrections = new ArrayList<>();
+            boolean existsInVocabulary = false;
 
-                List<String> wordCorrections = new ArrayList<>();
+            for (String wordFromVocab : vocabList){
 
-                for (String wordFromVocab : vocabList){
-                    if (LevenshteinDistance.distance(wordToCheck, wordFromVocab) <= maxDistance){
-                        wordCorrections.add(wordFromVocab);
-                    }
+                int distance = LevenshteinDistance.distance(wordToCheck, wordFromVocab);
+
+                if (distance == 0){
+                    existsInVocabulary = true;
                 }
+                else if (distance <= maxDistance){
+                    wordCorrections.add(wordFromVocab);
+                }
+            }
 
+            if (!existsInVocabulary){
                 corrections.put(wordToCheck, wordCorrections);
             }
         }

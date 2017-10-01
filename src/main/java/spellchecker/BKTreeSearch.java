@@ -1,6 +1,7 @@
 package spellchecker;
 
 import org.apache.commons.lang3.time.StopWatch;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
@@ -30,10 +31,21 @@ public class BKTreeSearch {
 
         for (String wordToCheck : sentenceList){
 
-            if (!vocabList.contains(wordToCheck)){
+            List<Pair<Integer, String>> wordCorrectionsPairs = bkTree.query(wordToCheck, maxDistance);
+            List<String> wordCorrectionsList = new ArrayList<>();
+            boolean existsInVocabulary = false;
 
-                List<String> wordCorrections = bkTree.query(wordToCheck, maxDistance);
-                corrections.put(wordToCheck, wordCorrections);
+            for (Pair<Integer, String> pair : wordCorrectionsPairs){
+                if (pair.getLeft() == 0){
+                    existsInVocabulary = true;
+                }
+                else{
+                    wordCorrectionsList.add(pair.getRight());
+                }
+            }
+
+            if (!existsInVocabulary){
+                corrections.put(wordToCheck, wordCorrectionsList);
             }
         }
 

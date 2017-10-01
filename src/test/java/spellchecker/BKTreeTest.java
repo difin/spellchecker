@@ -1,9 +1,11 @@
 package spellchecker;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,25 +29,30 @@ public class BKTreeTest {
     @Test
     public void queryWithToleranceOneAndExpectOneMatch(){
 
-        List<String> matches = tree.query("bike", 1);
+        List<Pair<Integer, String>> matches = tree.query("bike", 1);
 
         Assert.assertTrue(matches.size() == 1);
-        Assert.assertTrue(matches.iterator().next().equals("biker"));
+        Assert.assertTrue(matches.iterator().next().getRight().equals("biker"));
     }
 
     @Test
     public void queryWithToleranceTwoAndExpectOneMatch(){
 
-        List<String> matches = tree.query("bright", 2);
+        List<Pair<Integer, String>> matches = tree.query("bright", 2);
 
         Assert.assertTrue(matches.size() == 1);
-        Assert.assertTrue(matches.iterator().next().equals("night"));
+        Assert.assertTrue(matches.iterator().next().getRight().equals("night"));
     }
 
     @Test
     public void queryWithToleranceTwoAndExpectThreeMatch(){
 
-        List<String> matches = tree.query("rice", 2);
+        List<Pair<Integer, String>> matches = tree.query("rice", 2);
+        List<String> wordCorrectionsList = new ArrayList<>();
+
+        for (Pair<Integer, String> pair : matches){
+            wordCorrectionsList.add(pair.getRight());
+        }
 
         Assert.assertTrue(matches.size() == 4);
         Assert.assertTrue(matches.contains("nice"));

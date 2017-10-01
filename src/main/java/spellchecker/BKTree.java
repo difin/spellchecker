@@ -1,5 +1,8 @@
 package spellchecker;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.util.*;
 
 /**
@@ -33,13 +36,13 @@ public class BKTree
         return children.get(distance);
     }
 
-    public List<String> query(String wordInQuery, int tolerance){
+    public List<Pair<Integer, String>> query(String wordInQuery, int tolerance){
 
-        List<String> matches = new ArrayList<>();
+        List<Pair<Integer, String>> matches = new ArrayList<>();
         int distance = LevenshteinDistance.distance(word, wordInQuery);
 
         if (distance <= tolerance){
-            matches.add(word);
+            matches.add(new ImmutablePair(distance, word));
         }
 
         for (Map.Entry<Integer, BKTree> entry : children.entrySet()){
