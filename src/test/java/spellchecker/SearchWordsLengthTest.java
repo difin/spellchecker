@@ -41,17 +41,11 @@ public class SearchWordsLengthTest {
     };
 
     @Test
-    public void shortSearchWords(){
-        runTest("short_search_words");
-    }
+    public void shortSearchWords(){ runTest("short_search_words"); }
 
     @Test
-    public void mediumSearchWords(){
-        runTest("medium_search_words");
-    }
+    public void mediumSearchWords(){ runTest("medium_search_words"); }
 
     @Test
-    public void longSearchWords(){
-        runTest("long_search_words");
-    }
+    public void longSearchWords(){ runTest("long_search_words"); }
 }

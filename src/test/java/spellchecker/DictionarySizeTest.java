@@ -45,9 +45,7 @@ public class DictionarySizeTest {
     }
 
     @Test
-    public void maxDictionarySize100k(){
-        runTest("medium_search_words", 100000);
-    }
+    public void maxDictionarySize100k(){ runTest("medium_search_words", 100000); }
 
     @Test
     public void maxDictionarySize150k(){

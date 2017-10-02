@@ -40,9 +40,7 @@ public class MaxDistanceTest {
     };
 
     @Test
-    public void maxDistance0(){
-        runTest("medium_search_words", 0);
-    }
+    public void maxDistance0(){ runTest("medium_search_words", 0); }
 
     @Test
     public void maxDistance1(){
